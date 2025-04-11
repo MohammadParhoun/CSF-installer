@@ -20,6 +20,11 @@ RED="\e[31m"
 YELLOW="\e[33m"
 RESET="\e[0m"
 
+if [[ $EUID -ne 0 ]]; then
+    echo -e "${RED}This script must be run as root.${RESET}"
+    exit 1
+fi
+
 check_install() {
 package=$1
 if ! command -v $package &> /dev/null; then
